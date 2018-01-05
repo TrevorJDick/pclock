@@ -9,7 +9,7 @@ import yaml
 ##
 
 """
-pclock v0.0.0
+pclock v0.0.1
 Authors: T.Dick and P.Harpending
 """
 
@@ -51,7 +51,11 @@ class Project:
 
 
     def add_entry (self, ety):
-        """Takes a project and adds a new entry at the end of the list of entries"""
+        """Takes a project and adds a new entry at the end of the list of entries
+
+        Keyword args:
+        ety -- element of the Project list called entries
+        """
         self.entries.append(ety)
 
 
@@ -120,8 +124,7 @@ class Journal:
 
     def to_yaml(self):
         """Converts Journal instance to yaml string"""
-        d = {} #nst: empty dictionary
-
+        d = {} #empty dictionary
         for p in self.projects:
             key = p.name
             d[key] = [e.to_dict() for e in p.entries]
@@ -130,15 +133,22 @@ class Journal:
 
 
     def write_yaml(self, file_path):
+        """Writes yaml string of the Journal to a yaml file
+
+        Keyword args:
+        file_path -- chosen file path for yaml file
+        """
         data_write = open(file_path,'w')
         date_write.write(self.to_yaml())
         data_write.close()
 
 
-    #TODO: add ability to make new journal entry
     def add_project(self, elm):
-        """Create a new entry in the journal- a new project"""
-        #print(self.projects)
+        """Create a new entry in the journal- a new project
+
+        Keyword args:
+        elm -- element of the Journal list of projects
+        """
         p = Project(elm)
         self.projects.append(p)
         print(self.projects)
@@ -247,7 +257,7 @@ def main():
                 else:
                     print(p.name,'has not been clocked out.\n')
 
-        #dict
+        #dictionary
         elif 'd' == ipt:
             print(jnl.to_yaml())
 
